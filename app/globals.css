@@ -48,7 +48,18 @@
   --color-offwhite: #cccccc;
   --color-muted: #737373;
   --color-secondary-background: #0a0a0a;
+  --color-soft-background: #1a1a1a;
   --color-border: #2d2d2d;
+
+  --color-success-background: #132917;
+  --color-success: #0cce69;
+  --color-error-background: #3b1a1a;
+  --color-error: #d8111a;
+
+
+
+
+  --color-primaryME: #0072f5;
 }
 
 :root {

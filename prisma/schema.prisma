@@ -12,6 +12,8 @@ model App {
   id            String   @id @default(uuid())
   user_id       String
   creation_date DateTime @default(now())
+  origin        String
+  name          String
 
   events Event[]
 }
