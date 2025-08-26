@@ -34,7 +34,6 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog"
-
 import type { MainPanelViewsObject, TimePeriod, Routes, Countries, Browsers, OperatingSystems } from "@/app/types/types";
 
 const chartData1 = [
@@ -165,6 +164,7 @@ export default function Project() {
     const [browsers, setBrowsers] = useState<Browsers>({ hours24: [], week: [], month: [] })
     useEffect(() => {
         async function fetchProject() {
+            console.time("fetchProject")
             const response = await fetch(`/api/project/${id}`)
             const result = await response.json()
             setProject(result.project)
@@ -176,6 +176,7 @@ export default function Project() {
             setBrowsers(result.browsers)
             setOperatingSystems(result.operatingSystems)
             console.log("browsers" , result.browsers)
+            console.timeEnd("fetchProject")
             setIsLoading(false)
         }
         fetchProject()
@@ -207,7 +208,25 @@ export default function Project() {
                 <div className="w-[80vw] mx-auto py-10">
                     <div className="flex items-center justify-between">
                         <div className="space-y-3">
-                            <h1 className="text-3xl font-bold">{(project as any)?.name}</h1>
+                            <div className="flex items-center gap-2">
+                                <h1 className="text-3xl font-bold">{(project as any)?.name}</h1>
+                                <Dialog>
+                                    <DialogTrigger className="button-class px-2 py-1 cursor-pointer hover:bg-success-background hover:text-success">
+                                        Setup It
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <div className="">
+                                            <div>
+                                                <h1>Get Started</h1>
+                                                <h3>To start counting visitors and page views, follow these steps.</h3>
+                                            </div>
+                                            <div className="grid grid-cols-3">
+
+                                            </div>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
+                            </div>
                             <div className="flex items-center gap-2">
                                 <a href={(project as any)?.origin} target="_blank" className="flex items-center gap-2">
                                     <BiGlobe className="text-muted" />
