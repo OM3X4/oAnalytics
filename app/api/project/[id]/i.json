@@ -1,0 +1,488 @@
+[
+    {
+        "bucket": "2025-08-28T06:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 8,
+        "visitors": 8
+    },
+    {
+        "bucket": "2025-08-28T07:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 6,
+        "visitors": 6
+    },
+    {
+        "bucket": "2025-08-28T13:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": "2025-08-28T15:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 2
+    },
+    {
+        "bucket": "2025-08-28T17:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 15,
+        "visitors": 8
+    },
+    {
+        "bucket": "2025-08-28T18:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 4,
+        "visitors": 4
+    },
+    {
+        "bucket": "2025-08-28T19:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 21,
+        "visitors": 10
+    },
+    {
+        "bucket": "2025-08-28T20:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 10,
+        "visitors": 7
+    },
+    {
+        "bucket": "2025-08-28T21:00:00.000Z",
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": "/movie/244633-%D8%AD%D8%AF%D9%88%D8%AA%D8%A9%20%D9%85%D9%86%D8%B3%D9%8A%D8%A9",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/search?query=%D9%88%D8%A7%D8%A6%D9%84+%D9%81%D9%87%D9%85%D9%8A+",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/editMovieMetaData/45",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 3,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/search?query=wael",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/person/1614510-%D8%AF%D9%8A%D9%86%D8%A7-%D8%A7%D9%84%D8%B4%D8%B1%D8%A8%D9%8A%D9%86%D9%8A",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/allseries",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/allmovies",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 4,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": "/movie/45?ref=instagram&fbclid=IwZXh0bgNhZW0CMTEAAR759l8FPefi9XTEn1B-9dusHAAR27UbgDe5gI_f8Zngrdl-NaLAst9oh707Jg_aem_UNBnTvDFCgAivEhlD8GuLw",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/53620-%d9%85%d8%b3%d9%8a%d9%88%20%d8%b1%d9%85%d8%b6%d8%a7%d9%86%20%d9%85%d8%a8%d8%b1%d9%88%d9%83%20%d8%a3%d8%a8%d9%88%20%d8%a7%d9%84%d8%b9%d9%84%d9%85%d9%8a%d9%86%20%d8%ad%d9%85%d9%88%d8%af%d8%a9",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 3,
+        "visitors": 3
+    },
+    {
+        "bucket": null,
+        "path": "/upload",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 3,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": "/person/31-%D9%88%D8%A7%D8%A6%D9%84%20%D9%81%D9%87%D9%85%D9%8A%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%AD%D9%85%D9%8A%D8%AF",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 3,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/person/1443212-%d8%ad%d8%b3%d9%86-%d8%b9%d8%b2%d8%aa",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/45?ref=facebook&fbclid=IwZXh0bgNhZW0CMTEAAR5D-SR_WOwPSZCb7CRNI-gRph56RZMQgMbAQ3xO6hQDy8wJn66YouyHTEMKog_aem_6WpVgCIa32CD_WRcGcVjjg",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 17,
+        "visitors": 12
+    },
+    {
+        "bucket": null,
+        "path": "/person/213343-%D8%B3%D9%88%D8%B3%D9%86-%D8%A8%D8%AF%D8%B1",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/227463-%d8%ad%d8%af%d9%88%d8%af%20%d8%a7%d9%84%d9%84%d9%87",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/person/2396672-%d8%b3%d8%b9%d8%af-%d8%a3%d8%b1%d8%af%d8%b4",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/editMovieMetaData/46",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 3,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/45-%D9%85%D8%A7%D9%85%D8%A7%20%D9%88%D8%A8%D8%A7%D8%A8%D8%A7",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 7,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": "/person/32-%D8%A3%D8%AD%D9%85%D8%AF%20%D8%A7%D9%84%D9%82%D9%8A%D8%B9%D9%8A",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/?fbclid=IwZXh0bgNhZW0CMTEAAR5rGCDvTHGe3afY4wFF0rMQBlrEiDhZa4luhlDOUEjMBCSGWY-PFZKP1SeX2w_aem_vk5c1W1JLIM-UmTDSI__WQ",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/5-%D8%A7%D9%84%D8%B4%D8%A7%D8%B7%D8%B1",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/search?query=%D8%A3%D8%AD%D9%85%D8%AF+%D8%A7%D9%84%D9%82%D9%8A%D8%B9%D9%8A",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 69,
+        "visitors": 48
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": "Mobile Safari",
+        "os": null,
+        "views": 2,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": "Chrome",
+        "os": null,
+        "views": 8,
+        "visitors": 8
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": "Firefox",
+        "os": null,
+        "views": 46,
+        "visitors": 25
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": "Safari",
+        "os": null,
+        "views": 7,
+        "visitors": 7
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": "Mobile Chrome",
+        "os": null,
+        "views": 3,
+        "visitors": 3
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": "Facebook",
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": "iOS",
+        "views": 2,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": "Linux",
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": "macOS",
+        "views": 9,
+        "visitors": 9
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": "Windows",
+        "views": 51,
+        "visitors": 30
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 2
+    },
+    {
+        "bucket": null,
+        "path": null,
+        "country": null,
+        "browser": null,
+        "os": "Android",
+        "views": 4,
+        "visitors": 4
+    },
+    {
+        "bucket": null,
+        "path": "/movie/45?ref=facebook&fbclid=IwY2xjawMdoihleHRuA2FlbQIxMQABHuFJlNOOkcSWAvw4n_Y6eTbiLg8qP3M_B4zYift2nZGLTcV-ANLsnlfDNLsL_aem_mGXG-rL0D6lG3HLK3tfqNQ",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/person/226425-%D9%85%D8%B9%D8%AA%D8%B2-%D8%A7%D9%84%D8%AA%D9%88%D9%86%D9%8A",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/?fbclid=IwZXh0bgNhZW0CMTEAAR558OkkhAWpJPiMUeLtUzoUN8ArbTVzzZjK9AVYOA0hYbYiXbleeaRtZHwzcw_aem_1WsFdzX2ciaRwKqkghQUGA",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/46",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/45?ref=facebook",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/46-%D8%A3%D8%B2%D9%85%D8%A9%20%D8%AB%D9%82%D8%A9",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/movie/274176-%D8%A7%D9%84%D9%83%D8%A7%D8%A8%D8%AA%D9%86",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 1,
+        "visitors": 1
+    },
+    {
+        "bucket": null,
+        "path": "/editPerson",
+        "country": null,
+        "browser": null,
+        "os": null,
+        "views": 2,
+        "visitors": 2
+    }
+]

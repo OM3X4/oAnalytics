@@ -353,6 +353,42 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     }))
   };
 
+  let theNewSqlQuery: any = await prisma.$queryRaw`
+SELECT
+    bucket,
+    path,
+    country,
+    browser,
+    os,
+    SUM(views) AS views,
+    SUM(unique_visitors) AS visitors
+FROM event_rollup_hourly
+WHERE app_id = ${id}::uuid
+  AND bucket >= NOW() - INTERVAL '24 hours'
+GROUP BY GROUPING SETS (
+    (bucket),
+    (path),
+    (country),
+    (browser),
+    (os)
+)
+ORDER BY bucket ASC NULLS LAST;
+`;
+
+  theNewSqlQuery = theNewSqlQuery.map((item: any) => ({
+    bucket: item.bucket,
+    path: item.path,
+    country: item.country,
+    browser: item.browser,
+    os: item.os,
+    views: Number(item.views),
+    visitors: Number(item.visitors)
+  }));
+
+
+
+  console.log(JSON.stringify(theNewSqlQuery))
+
 
   return NextResponse.json({ project, visitors, views, onlineVisitors: Number(onlineVisitors[0].unique_clients), routes, countries, browsers, operatingSystems }, { status: 201 })
 }
