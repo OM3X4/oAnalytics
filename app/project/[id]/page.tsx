@@ -35,6 +35,8 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog"
 import type { MainPanelViewsObject, TimePeriod, Routes, Countries, Browsers, OperatingSystems } from "@/app/types/types";
+import Docs from "@/app/components/Docs";
+
 
 const chartData1 = [
     { month: "January", desktop: 186 },
@@ -210,22 +212,7 @@ export default function Project() {
                         <div className="space-y-3">
                             <div className="flex items-center gap-2">
                                 <h1 className="text-3xl font-bold">{(project as any)?.name}</h1>
-                                <Dialog>
-                                    <DialogTrigger className="button-class px-2 py-1 cursor-pointer hover:bg-success-background hover:text-success">
-                                        Setup It
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                        <div className="">
-                                            <div>
-                                                <h1>Get Started</h1>
-                                                <h3>To start counting visitors and page views, follow these steps.</h3>
-                                            </div>
-                                            <div className="grid grid-cols-3">
-
-                                            </div>
-                                        </div>
-                                    </DialogContent>
-                                </Dialog>
+                                <Docs appId={(project as any)?.id} />
                             </div>
                             <div className="flex items-center gap-2">
                                 <a href={(project as any)?.origin} target="_blank" className="flex items-center gap-2">
@@ -277,11 +264,11 @@ export default function Project() {
                                 <h4>Views</h4>
                             </div>
                         </CardHeader>
-                        <CardContent className="space-y-1 px-0 relative">
+                        <CardContent className="card-content-class">
                             {routes[period].slice(0, 5).map((route, index) => {
                                 // Calculate opacity based on index (first row 100%, last row maybe 50%)
                                 const maxOpacity = 1;
-                                const minOpacity = 0.5;
+                                const minOpacity = 0.8;
                                 const total = routes[period].length;
                                 const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -323,7 +310,7 @@ export default function Project() {
                                     <div className="flex-1 overflow-y-auto space-y-1 px-0 relative">
                                         {routes[period].map((route, index) => {
                                             const maxOpacity = 1;
-                                            const minOpacity = 0.5;
+                                            const minOpacity = 0.8;
                                             const total = routes[period].length;
                                             const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -361,11 +348,11 @@ export default function Project() {
                                 <h4>Views</h4>
                             </div>
                         </CardHeader>
-                        <CardContent className="space-y-1 px-0 relative">
+                        <CardContent className="card-content-class">
                             {countries[period].slice(0, 5).map((route, index) => {
                                 // Calculate opacity based on index (first row 100%, last row maybe 50%)
                                 const maxOpacity = 1;
-                                const minOpacity = 0.5;
+                                const minOpacity = 0.8;
                                 const total = routes[period].length;
                                 const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -405,7 +392,7 @@ export default function Project() {
                                     <div className="flex-1 overflow-y-auto space-y-1 px-0 relative">
                                         {countries[period].map((route, index) => {
                                             const maxOpacity = 1;
-                                            const minOpacity = 0.5;
+                                            const minOpacity = 0.8;
                                             const total = routes[period].length;
                                             const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -441,11 +428,11 @@ export default function Project() {
                                 <h4>Views</h4>
                             </div>
                         </CardHeader>
-                        <CardContent className="space-y-1 px-0 relative">
+                        <CardContent className="card-content-class">
                             {operatingSystems[period].slice(0, 5).map((route, index) => {
                                 // Calculate opacity based on index (first row 100%, last row maybe 50%)
                                 const maxOpacity = 1;
-                                const minOpacity = 0.5;
+                                const minOpacity = 0.8;
                                 const total = routes[period].length;
                                 const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -485,7 +472,7 @@ export default function Project() {
                                     <div className="flex-1 overflow-y-auto space-y-1 px-0 relative">
                                         {operatingSystems[period].map((route, index) => {
                                             const maxOpacity = 1;
-                                            const minOpacity = 0.5;
+                                            const minOpacity = 0.8;
                                             const total = routes[period].length;
                                             const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -521,11 +508,11 @@ export default function Project() {
                                 <h4>Views</h4>
                             </div>
                         </CardHeader>
-                        <CardContent className="space-y-1 px-0 relative">
+                        <CardContent className="card-content-class">
                             {browsers[period].slice(0, 5).map((route, index) => {
                                 // Calculate opacity based on index (first row 100%, last row maybe 50%)
                                 const maxOpacity = 1;
-                                const minOpacity = 0.5;
+                                const minOpacity = 0.8;
                                 const total = routes[period].length;
                                 const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 
@@ -565,7 +552,7 @@ export default function Project() {
                                     <div className="flex-1 overflow-y-auto space-y-1 px-0 relative">
                                         {browsers[period].map((route, index) => {
                                             const maxOpacity = 1;
-                                            const minOpacity = 0.5;
+                                            const minOpacity = 0.8;
                                             const total = routes[period].length;
                                             const opacity = maxOpacity - ((maxOpacity - minOpacity) * index) / (total - 1);
 

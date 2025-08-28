@@ -65,7 +65,7 @@ function page() {
 	}
 
 
-	if(projects.length == 0) {
+	if(!projects || projects.length == 0) {
 		return (
 			<div className="w-screen h-screen flex items-center justify-center">
 				<p className="text-white">No Projects Found</p>

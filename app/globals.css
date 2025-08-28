@@ -51,6 +51,10 @@
   --color-soft-background: #1a1a1a;
   --color-border: #2d2d2d;
 
+  --color-blue-highlight-background: #0f2f57;
+  --color-blue-highlight: #306bab;
+
+
   --color-success-background: #132917;
   --color-success: #0cce69;
   --color-error-background: #3b1a1a;
@@ -142,4 +146,16 @@
 
 @utility button-class {
   @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive
+}
+
+@utility card-content-class {
+  @apply space-y-1 !px-0 relative grid grid-cols-1 grid-rows-5
+}
+
+@utility docs-pagination {
+  @apply w-8 h-8 aspect-square flex items-center justify-center rounded-full border-border border-2
+}
+
+@utility inline-code {
+  @apply bg-soft-background px-2 py-1 rounded-sm border border-border font-normal
 }
