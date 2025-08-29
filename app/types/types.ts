@@ -51,4 +51,26 @@ export type OperatingSystems = {
     month: OperatingSystem[]
 }
 
-export type TimePeriod = "hours24" | "week" | "month"
+export interface TimeRangeInternal {
+    from: Date
+    to: Date | undefined
+}
+export type TimeRange = TimeRangeInternal | undefined
+
+
+export interface RollUpResponse {
+    bucket: string | null;
+    path: string | null;
+    country: string | null;
+    browser: string | null;
+    os: string | null;
+    views: number;
+    visitors: number;
+}
+
+export interface Filters {
+    country: string | null;
+    browser: string | null;
+    os: string | null;
+    path: string | null;
+}

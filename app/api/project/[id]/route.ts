@@ -1,158 +1,52 @@
 import { NextResponse, NextRequest } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import type { RollUpResponse } from "@/app/types/types";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
 
-  const session = await auth()
+	const searchParams: any = req.nextUrl.searchParams
+	console.log(searchParams)
 
-  const id = params.id
+	let country = searchParams.get("country")
+	let browser = searchParams.get("browser")
+	let os = searchParams.get("os")
+	let path = searchParams.get("path")
 
-  if (!id) {
-    return NextResponse.json({ error: "No id" }, { status: 400 })
-  }
+	let from = new Date(searchParams.from);
+	let to = new Date(searchParams.to);
+	if (isNaN(from.getTime())) {
+		from = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+		from.setHours(0, 0, 0, 0);
+	}
+	if (isNaN(to.getTime())) {
+		to = new Date();
+	}
+	const timeRange = { from: from.toISOString().split('T')[0], to: to.toISOString().split('T')[0] };
 
-  if (!session || !session.user || !session.user.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
+	const session = await auth()
 
+	const id = params.id
 
-  const project = await prisma.app.findUnique({
-    where: {
-      id
-    }
-  })
+	if (!id) {
+		return NextResponse.json({ error: "No id" }, { status: 400 })
+	}
 
-  if (!project) return NextResponse.json({ error: "Project not found" }, { status: 404 })
-
-  const hours24: any[] = await prisma.$queryRaw`
-      WITH hours AS (
-        SELECT generate_series(
-          date_trunc('hour', NOW() - INTERVAL '23 hours'),
-          date_trunc('hour', NOW()),
-          '1 hour'::interval
-        ) AS bucket
-      )
-      SELECT
-        h.bucket,
-        COUNT(e.*) AS count
-      FROM hours h
-      LEFT JOIN "Event" e
-        ON date_trunc('hour', e."date") = h.bucket
-        AND e."app_id" = ${id}
-      GROUP BY h.bucket
-      ORDER BY h.bucket ASC
-    `;
-
-  const week: any[] = await prisma.$queryRaw`
-      WITH days AS (
-        SELECT generate_series(
-          date_trunc('day', NOW() - INTERVAL '6 days'),
-          date_trunc('day', NOW()),
-          '1 day'::interval
-        ) AS bucket
-      )
-      SELECT
-        d.bucket,
-        COUNT(e.*) AS count
-      FROM days d
-      LEFT JOIN "Event" e
-        ON date_trunc('day', e."date") = d.bucket
-        AND e."app_id" = ${id}
-      GROUP BY d.bucket
-      ORDER BY d.bucket ASC
-    `;
-
-  const month: any[] = await prisma.$queryRaw`
-      WITH days AS (
-        SELECT generate_series(
-          date_trunc('day', NOW() - INTERVAL '29 days'),
-          date_trunc('day', NOW()),
-          '1 day'::interval
-        ) AS bucket
-      )
-      SELECT
-        d.bucket,
-        COUNT(e.*) AS count
-      FROM days d
-      LEFT JOIN "Event" e
-        ON date_trunc('day', e."date") = d.bucket
-        AND e."app_id" = ${id}
-      GROUP BY d.bucket
-      ORDER BY d.bucket ASC
-    `;
-
-  const hours24Unique: any[] = await prisma.$queryRaw`
-      WITH hours AS (
-        SELECT generate_series(
-          date_trunc('hour', NOW() - INTERVAL '23 hours'),
-          date_trunc('hour', NOW()),
-          '1 hour'::interval
-        ) AS bucket
-      )
-      SELECT
-        h.bucket,
-        COUNT(DISTINCT e."client_id") AS unique_clients
-      FROM hours h
-      LEFT JOIN "Event" e
-        ON date_trunc('hour', e."date") = h.bucket
-        AND e."app_id" = ${id}
-      GROUP BY h.bucket
-      ORDER BY h.bucket ASC
-    `;
-
-  const weekUnique: any[] = await prisma.$queryRaw`
-      WITH days AS (
-        SELECT generate_series(
-          date_trunc('day', NOW() - INTERVAL '6 days'),
-          date_trunc('day', NOW()),
-          '1 day'::interval
-        ) AS bucket
-      )
-      SELECT
-        d.bucket,
-        COUNT(DISTINCT e."client_id") AS unique_clients
-      FROM days d
-      LEFT JOIN "Event" e
-        ON date_trunc('day', e."date") = d.bucket
-        AND e."app_id" = ${id}
-      GROUP BY d.bucket
-      ORDER BY d.bucket ASC
-    `;
-
-  const monthUnique: any[] = await prisma.$queryRaw`
-      WITH days AS (
-        SELECT generate_series(
-          date_trunc('day', NOW() - INTERVAL '29 days'),
-          date_trunc('day', NOW()),
-          '1 day'::interval
-        ) AS bucket
-      )
-      SELECT
-        d.bucket,
-        COUNT(DISTINCT e."client_id") AS unique_clients
-      FROM days d
-      LEFT JOIN "Event" e
-        ON date_trunc('day', e."date") = d.bucket
-        AND e."app_id" = ${id}
-      GROUP BY d.bucket
-      ORDER BY d.bucket ASC
-    `;
+	if (!session || !session.user || !session.user.id) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+	}
 
 
-  const visitors = {
-    hours24: hours24Unique.map((item: any) => ({ bucket: item.bucket, count: Number(item.unique_clients) })),
-    week: weekUnique.map((item: any) => ({ bucket: item.bucket, count: Number(item.unique_clients) })),
-    month: monthUnique.map((item: any) => ({ bucket: item.bucket, count: Number(item.unique_clients) }))
-  }
-  const views = {
-    hours24: hours24.map((item: any) => ({ bucket: item.bucket, count: Number(item.count) })),
-    week: week.map((item: any) => ({ bucket: item.bucket, count: Number(item.count) })),
-    month: month.map((item: any) => ({ bucket: item.bucket, count: Number(item.count) }))
-  }
+	const project = await prisma.app.findUnique({
+		where: {
+			id
+		}
+	})
+
+	if (!project) return NextResponse.json({ error: "Project not found" }, { status: 404 })
 
 
-  const onlineVisitors: any[] = await prisma.$queryRaw`
+	const onlineVisitors: any[] = await prisma.$queryRaw`
         SELECT COUNT(DISTINCT "client_id") AS unique_clients
         FROM "Event"
         WHERE "app_id" = ${id}
@@ -160,235 +54,67 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             AND "date" >= NOW() - INTERVAL '3 minutes'
     `;
 
-  const routeHours: any[] = await prisma.$queryRaw`
-        SELECT
-            "path",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '24 hours'
-        GROUP BY "path"
-        ORDER BY total_events DESC
-    `;
-  const routeWeek: any[] = await prisma.$queryRaw`
-        SELECT
-            "path",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '7 days'
-        GROUP BY "path"
-        ORDER BY total_events DESC
-    `;
-  const routeMonth: any[] = await prisma.$queryRaw`
-        SELECT
-            "path",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '30 days'
-        GROUP BY "path"
-        ORDER BY total_events DESC
-    `;
-  /*
-  [
-  { path: '/home', total_events: 120, unique_visitors: 50 },
-  { path: '/about', total_events: 30, unique_visitors: 25 },
-  ...
-  ]
-  */
+	const conditions: string[] = [
+		`bucket BETWEEN '${timeRange.from}'::date AND '${timeRange.to}'::date`
+	];
 
-  const routes = {
-    hours24: routeHours.map(item => ({ path: item.path, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) })),
-    week: routeWeek.map(item => ({ path: item.path, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) })),
-    month: routeMonth.map(item => ({ path: item.path, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) }))
-  }
+	console.log(browser)
+	if (browser) {
+		conditions.push(`browser = '${browser}'`);
+	}
+	console.log(country)
+	if (country) {
+		conditions.push(`country = '${country}'`);
+	}
+	console.log(os)
+	if (os) {
+		conditions.push(`os = '${os}'`);
+	}
+	console.log((path))
+	if (path) {
+		conditions.push(`path = '${(path)}'`);
+	}
 
-  // [
-  //     { country: 'US', total_events: 120, unique_visitors: 45 },
-  //     { country: 'EG', total_events: 80, unique_visitors: 30 },
-  //     { country: 'FR', total_events: 20, unique_visitors: 15 },
-  //     { country: null, total_events: 5, unique_visitors: 5 } // unknown country
-  // ]
-  const countriesMonth: any[] = await prisma.$queryRaw`
-        SELECT
-            "country",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '30 days'
-        GROUP BY "country"
-        ORDER BY total_events DESC
-        `;
-  const countriesWeek: any[] = await prisma.$queryRaw`
-        SELECT
-            "country",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '7 days'
-        GROUP BY "country"
-        ORDER BY total_events DESC
-        `;
-  const countriesHours: any[] = await prisma.$queryRaw`
-        SELECT
-            "country",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '24 hours'
-        GROUP BY "country"
-        ORDER BY total_events DESC
-        `;
+	const whereClause = conditions.length ? `AND ${conditions.join(" AND ")}` : "";
 
-  const countries = {
-    hours24: countriesHours.map(item => ({ country: item.country, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) })),
-    week: countriesWeek.map(item => ({ country: item.country, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) })),
-    month: countriesMonth.map(item => ({ country: item.country, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) }))
-  }
+	console.log(whereClause)
 
-  // [
-  //     { browser: 'Chrome', total_events: 120, unique_visitors: 50 },
-  //     { browser: 'Firefox', total_events: 40, unique_visitors: 30 },
-  //     { browser: null, total_events: 5, unique_visitors: 5 } // unknown
-  // ]
+	const query = `
+		SELECT
+			bucket,
+			path,
+			country,
+			browser,
+			os,
+			SUM(views) AS views,
+			SUM(unique_visitors) AS visitors
+		FROM event_rollup_hourly
+		WHERE app_id = '${id}'::uuid
+		${whereClause}
+		GROUP BY GROUPING SETS (
+			(bucket),
+			(path),
+			(country),
+			(browser),
+			(os)
+		)
+		ORDER BY bucket ASC NULLS LAST;
+	`;
 
-  const browsersMonth: any[] = await prisma.$queryRaw`
-        SELECT
-            "browser" AS browser,
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '30 days'
-        GROUP BY "browser"
-        ORDER BY total_events DESC
-        `;
-  const browsersWeek: any[] = await prisma.$queryRaw`
-        SELECT
-            "browser" AS browser,
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '7 days'
-        GROUP BY "browser"
-        ORDER BY total_events DESC
-        `;
-  const browsershours: any[] = await prisma.$queryRaw`
-        SELECT
-            "browser" AS browser,
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '24 hours'
-        GROUP BY "browser"
-        ORDER BY total_events DESC
-        `;
+	let theNewSqlQuery: RollUpResponse[] = await prisma.$queryRawUnsafe(query);
 
-  const browsers = {
-    hours24: browsershours.map(item => ({ browser: item.browser, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) })),
-    week: browsersWeek.map(item => ({ browser: item.browser, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) })),
-    month: browsersMonth.map(item => ({ browser: item.browser, total_events: Number(item.total_events), unique_visitors: Number(item.unique_visitors) }))
-  }
+	theNewSqlQuery = theNewSqlQuery.map((item: any) => ({
+		bucket: item.bucket,
+		path: item.path,
+		country: item.country,
+		browser: item.browser,
+		os: item.os,
+		views: Number(item.views),
+		visitors: Number(item.visitors)
+	}));
 
-  const osMonth: any[] = await prisma.$queryRaw`
-        SELECT
-            "os",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '30 days'
-        GROUP BY "os"
-        ORDER BY total_events DESC
-        `;
+	console.log(theNewSqlQuery)
 
-  const osWeek: any[] = await prisma.$queryRaw`
-        SELECT
-            "os",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '7 days'
-        GROUP BY "os"
-        ORDER BY total_events DESC
-        `;
+	return NextResponse.json({ data: theNewSqlQuery, project, onlineVisitors: Number(onlineVisitors[0].unique_clients) }, { status: 201 })
 
-  const osHours: any[] = await prisma.$queryRaw`
-        SELECT
-            "os",
-            COUNT(*) AS total_events,
-            COUNT(DISTINCT "client_id") AS unique_visitors
-        FROM "Event"
-        WHERE "app_id" = ${id}
-            AND "date" >= NOW() - INTERVAL '24 hours'
-        GROUP BY "os"
-        ORDER BY total_events DESC
-        `;
-
-  const operatingSystems = {
-    hours24: osHours.map(item => ({
-      os: item.os,
-      total_events: Number(item.total_events),
-      unique_visitors: Number(item.unique_visitors)
-    })),
-    week: osWeek.map(item => ({
-      os: item.os,
-      total_events: Number(item.total_events),
-      unique_visitors: Number(item.unique_visitors)
-    })),
-    month: osMonth.map(item => ({
-      os: item.os,
-      total_events: Number(item.total_events),
-      unique_visitors: Number(item.unique_visitors)
-    }))
-  };
-
-  let theNewSqlQuery: any = await prisma.$queryRaw`
-SELECT
-    bucket,
-    path,
-    country,
-    browser,
-    os,
-    SUM(views) AS views,
-    SUM(unique_visitors) AS visitors
-FROM event_rollup_hourly
-WHERE app_id = ${id}::uuid
-  AND bucket >= NOW() - INTERVAL '24 hours'
-GROUP BY GROUPING SETS (
-    (bucket),
-    (path),
-    (country),
-    (browser),
-    (os)
-)
-ORDER BY bucket ASC NULLS LAST;
-`;
-
-  theNewSqlQuery = theNewSqlQuery.map((item: any) => ({
-    bucket: item.bucket,
-    path: item.path,
-    country: item.country,
-    browser: item.browser,
-    os: item.os,
-    views: Number(item.views),
-    visitors: Number(item.visitors)
-  }));
-
-
-
-  console.log(JSON.stringify(theNewSqlQuery))
-
-
-  return NextResponse.json({ project, visitors, views, onlineVisitors: Number(onlineVisitors[0].unique_clients), routes, countries, browsers, operatingSystems }, { status: 201 })
 }
